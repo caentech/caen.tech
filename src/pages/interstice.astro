@@ -135,6 +135,71 @@ const roomsJson = JSON.stringify(
       </footer>
     </div>
 
+    <!-- ===== Slide 4: Infos pratiques ===== -->
+    <div class="Interstice-slide" data-slide="infos">
+      <div class="Interstice-diagonal"></div>
+      <header class="Interstice-header">
+        <a class="Interstice-logo" href="/" aria-label="Caen.Tech">
+          <img src="/images/logos/logo-fond-jaune.png" alt="Caen.Tech" />
+        </a>
+        <div class="Interstice-meta">9 juin 2026 — MoHo, Caen</div>
+      </header>
+      <main class="Interstice-content Infos-content">
+        <div class="Infos-titleRow">
+          <h1 class="Infos-title">&Agrave; ne pas<br />manquer</h1>
+          <div class="Infos-titleSlash"></div>
+        </div>
+        <div class="Infos-main">
+          <article class="Infos-card Infos-card--feedback">
+            <h2 class="Infos-cardTitle">Donnez votre avis</h2>
+            <p class="Infos-cardLead">
+              Partagez votre ressenti sur les conf&eacute;rences&nbsp;:
+            </p>
+            <ul class="Infos-cardList">
+              <li>
+                <span class="Infos-bullet">1</span>
+                <span>Collez une gommette sur le tableau des sessions dans l&rsquo;atrium</span>
+              </li>
+              <li>
+                <span class="Infos-bullet">2</span>
+                <span>Ou flashez le QR code pour utiliser OpenFeedback</span>
+              </li>
+            </ul>
+            <div class="Infos-qr">
+              <img src="/images/qr-code-openfeedback.png" alt="QR code OpenFeedback" />
+              <span class="Infos-qrCaption">openfeedback.io</span>
+            </div>
+          </article>
+          <article class="Infos-card Infos-card--puzzle">
+            <span class="Infos-cardTag">Fil rouge</span>
+            <h2 class="Infos-cardTitle">Le puzzle de la journ&eacute;e</h2>
+            <p class="Infos-cardLead">
+              Rassemblez les pi&egrave;ces de votre puzzle tout au long de la journ&eacute;e.
+            </p>
+            <ol class="Infos-cardSteps">
+              <li>R&eacute;unissez votre &eacute;quipe autour du puzzle reconstitu&eacute;</li>
+              <li>Prenez-vous en photo avec votre puzzle</li>
+              <li>Envoyez-la &agrave; <strong>concours@caen.tech</strong></li>
+            </ol>
+            <p class="Infos-cardPrize">
+              <span class="Infos-cardPrizeLabel">&Agrave; gagner</span>
+              un lot remis lors de la keynote de cl&ocirc;ture
+            </p>
+          </article>
+        </div>
+        <aside class="Infos-rules">
+          <h3 class="Infos-rulesTitle">Les r&egrave;gles du lieu</h3>
+          <ul class="Infos-rulesList">
+            <li>Pas de nourriture dans les salles</li>
+            <li>Interdiction de fumer en int&eacute;rieur</li>
+          </ul>
+        </aside>
+      </main>
+      <footer class="Interstice-footer">
+        <span class="Interstice-footerTime" data-clock>--:--</span>
+      </footer>
+    </div>
+
     <!-- ===== Slide 3: Session courante ===== -->
     <div class="Interstice-slide" data-slide="session">
       <div class="Interstice-diagonal"></div>
@@ -163,6 +228,7 @@ const roomsJson = JSON.stringify(
     <div class="Interstice-pips" id="slide-pips">
       <button class="Interstice-pip is-active" data-target="programme" aria-label="Programme"></button>
       <button class="Interstice-pip" data-target="sponsors" aria-label="Sponsors"></button>
+      <button class="Interstice-pip" data-target="infos" aria-label="Infos pratiques"></button>
       <button class="Interstice-pip" data-target="session" aria-label="Session courante"></button>
     </div>
     </div>
@@ -1012,6 +1078,257 @@ const roomsJson = JSON.stringify(
         font-size: 0.75rem;
         font-weight: 600;
         color: rgba(27, 27, 27, 0.4);
+      }
+
+      /* =========================
+         SLIDE 4: INFOS PRATIQUES
+         ========================= */
+
+      .Infos-content {
+        padding-top: 8px;
+        gap: 32px;
+      }
+
+      .Infos-titleRow {
+        display: flex;
+        align-items: flex-end;
+        gap: 24px;
+      }
+
+      .Infos-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        line-height: 0.9;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+      }
+
+      .Infos-titleSlash {
+        height: 16px;
+        width: 180px;
+        background: #ffdd00;
+        transform: skewX(-12deg);
+        margin-bottom: 8px;
+      }
+
+      .Infos-main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        flex: 1;
+        min-height: 0;
+      }
+
+      .Infos-card {
+        position: relative;
+        background: #fff;
+        border-radius: 20px;
+        padding: 40px 44px;
+        border: 1px solid rgba(27, 27, 27, 0.06);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow: hidden;
+      }
+
+      .Infos-card--puzzle {
+        background: #1b1b1b;
+        color: #fff;
+        border-color: #1b1b1b;
+      }
+
+      .Infos-cardTag {
+        align-self: flex-start;
+        font-size: 0.65rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: #ffdd00;
+        color: #1b1b1b;
+      }
+
+      .Infos-cardTitle {
+        font-size: 2.2rem;
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+      }
+
+      .Infos-cardLead {
+        font-size: 1.15rem;
+        font-weight: 500;
+        line-height: 1.4;
+        color: rgba(27, 27, 27, 0.7);
+      }
+
+      .Infos-card--puzzle .Infos-cardLead {
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      .Infos-cardList {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .Infos-cardList li {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      .Infos-bullet {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #ffdd00;
+        color: #1b1b1b;
+        font-size: 0.95rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .Infos-qr {
+        margin-top: auto;
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 14px;
+        background: #fff;
+        border-radius: 16px;
+        border: 2px solid #1b1b1b;
+      }
+
+      .Infos-qr img {
+        display: block;
+        width: 200px;
+        height: 200px;
+      }
+
+      .Infos-qrCaption {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: rgba(27, 27, 27, 0.55);
+      }
+
+      .Infos-cardSteps {
+        list-style: none;
+        counter-reset: step;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .Infos-cardSteps li {
+        counter-increment: step;
+        position: relative;
+        padding-left: 48px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        line-height: 1.35;
+      }
+
+      .Infos-cardSteps li::before {
+        content: counter(step);
+        position: absolute;
+        left: 0;
+        top: -2px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #ffdd00;
+        color: #1b1b1b;
+        font-size: 0.95rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .Infos-cardSteps strong {
+        color: #ffdd00;
+        font-weight: 800;
+      }
+
+      .Infos-cardPrize {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 18px 22px;
+        border-radius: 14px;
+        background: rgba(255, 221, 0, 0.12);
+        border: 1px dashed rgba(255, 221, 0, 0.5);
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.35;
+      }
+
+      .Infos-cardPrizeLabel {
+        font-size: 0.65rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: #ffdd00;
+      }
+
+      .Infos-rules {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        padding: 20px 32px;
+        border-radius: 14px;
+        background: rgba(27, 27, 27, 0.04);
+      }
+
+      .Infos-rulesTitle {
+        flex-shrink: 0;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: rgba(27, 27, 27, 0.55);
+      }
+
+      .Infos-rulesList {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 28px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: rgba(27, 27, 27, 0.75);
+      }
+
+      .Infos-rulesList li {
+        position: relative;
+        padding-left: 18px;
+      }
+
+      .Infos-rulesList li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #ffdd00;
       }
 
       /* =========================
