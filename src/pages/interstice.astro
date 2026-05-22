@@ -623,12 +623,12 @@ const roomsJson = JSON.stringify(
             e.preventDefault();
             break;
           case "ArrowUp":
-            timeOffsetMinutes += 15;
+            timeOffsetMinutes += e.shiftKey ? 30 : 1;
             rerender();
             e.preventDefault();
             break;
           case "ArrowDown":
-            timeOffsetMinutes -= 15;
+            timeOffsetMinutes -= e.shiftKey ? 30 : 1;
             rerender();
             e.preventDefault();
             break;
