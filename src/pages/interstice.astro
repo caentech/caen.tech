@@ -36,6 +36,8 @@ const tiers = [
   { key: "bronze" as const, label: "Bronze", color: "#a0522d" },
 ];
 
+const goldSponsors = allSponsors.filter((s) => s.data.tier === "gold");
+
 const programJson = JSON.stringify(
   sortedProgram.map((p) => ({
     id: p.id,
@@ -135,6 +137,68 @@ const roomsJson = JSON.stringify(
       </footer>
     </div>
 
+    <!-- ===== Slide: Sur place ===== -->
+    <div class="Interstice-slide" data-slide="surplace">
+      <div class="Interstice-diagonal"></div>
+      <header class="Interstice-header">
+        <a class="Interstice-logo" href="/" aria-label="Caen.Tech">
+          <img src="/images/logos/logo-fond-jaune.png" alt="Caen.Tech" />
+        </a>
+        <div class="Interstice-meta">9 juin 2026 — MoHo, Caen</div>
+      </header>
+      <main class="Interstice-content SurPlace-content">
+        <div class="SurPlace-titleRow">
+          <h1 class="SurPlace-title">Dans l&rsquo;atrium</h1>
+          <div class="SurPlace-titleSlash"></div>
+        </div>
+        <div class="SurPlace-main">
+          <section class="SurPlace-block">
+            <h2 class="SurPlace-blockTitle">Nos sponsors Gold</h2>
+            <p class="SurPlace-blockLead">
+              Allez &agrave; leur rencontre&nbsp;: ils vous attendent sur leurs stands.
+            </p>
+            <div class="SurPlace-goldGrid">
+              {
+                goldSponsors.map((s) => (
+                  <div class="SurPlace-goldItem">
+                    <img src={s.data.logo} alt={s.data.name} />
+                    <span>{s.data.name}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+          <section class="SurPlace-block SurPlace-block--zone">
+            <h2 class="SurPlace-blockTitle">Zone &Eacute;cosyst&egrave;me Tech Caennaise</h2>
+            <p class="SurPlace-blockLead">
+              Deux sessions de pr&eacute;sentation rythment la zone tout au long de la journ&eacute;e.
+            </p>
+            <div class="SurPlace-sessions">
+              <div class="SurPlace-session">
+                <div class="SurPlace-sessionHeader">
+                  <span class="SurPlace-sessionTag">Session</span>
+                  <span class="SurPlace-sessionTime">10:45 &rarr; 11:15</span>
+                </div>
+                <p class="SurPlace-sessionNames">
+                  DataLab Normandie, OPCO ATLAS, Normandie Incubation
+                </p>
+              </div>
+              <div class="SurPlace-session">
+                <div class="SurPlace-sessionHeader">
+                  <span class="SurPlace-sessionTag">Session</span>
+                  <span class="SurPlace-sessionTime">15:15 &rarr; 15:45</span>
+                </div>
+                <p class="SurPlace-sessionNames">Data Caen</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+      <footer class="Interstice-footer">
+        <span class="Interstice-footerTime" data-clock>--:--</span>
+      </footer>
+    </div>
+
     <!-- ===== Slide 4: Infos pratiques ===== -->
     <div class="Interstice-slide" data-slide="infos">
       <div class="Interstice-diagonal"></div>
@@ -228,6 +292,7 @@ const roomsJson = JSON.stringify(
     <div class="Interstice-pips" id="slide-pips">
       <button class="Interstice-pip is-active" data-target="programme" aria-label="Programme"></button>
       <button class="Interstice-pip" data-target="sponsors" aria-label="Sponsors"></button>
+      <button class="Interstice-pip" data-target="surplace" aria-label="Dans l'atrium"></button>
       <button class="Interstice-pip" data-target="infos" aria-label="Infos pratiques"></button>
       <button class="Interstice-pip" data-target="session" aria-label="Session courante"></button>
     </div>
@@ -1078,6 +1143,157 @@ const roomsJson = JSON.stringify(
         font-size: 0.75rem;
         font-weight: 600;
         color: rgba(27, 27, 27, 0.4);
+      }
+
+      /* =========================
+         SLIDE: SUR PLACE
+         ========================= */
+
+      .SurPlace-content {
+        padding-top: 8px;
+        gap: 40px;
+      }
+
+      .SurPlace-titleRow {
+        display: flex;
+        align-items: flex-end;
+        gap: 24px;
+      }
+
+      .SurPlace-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        line-height: 0.9;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+      }
+
+      .SurPlace-titleSlash {
+        height: 16px;
+        width: 180px;
+        background: #ffdd00;
+        transform: skewX(-12deg);
+        margin-bottom: 8px;
+      }
+
+      .SurPlace-main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        flex: 1;
+        min-height: 0;
+      }
+
+      .SurPlace-block {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        padding: 44px 48px;
+        border-radius: 24px;
+        background: #fff;
+        border: 1px solid rgba(27, 27, 27, 0.06);
+      }
+
+      .SurPlace-block--zone {
+        background: #1b1b1b;
+        color: #fff;
+        border-color: #1b1b1b;
+      }
+
+      .SurPlace-blockTitle {
+        font-size: 2rem;
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+      }
+
+      .SurPlace-blockLead {
+        font-size: 1.15rem;
+        font-weight: 500;
+        line-height: 1.4;
+        color: rgba(27, 27, 27, 0.7);
+      }
+
+      .SurPlace-block--zone .SurPlace-blockLead {
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      .SurPlace-goldGrid {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 48px;
+      }
+
+      .SurPlace-goldItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .SurPlace-goldItem img {
+        object-fit: contain;
+        display: block;
+        height: 130px;
+        max-width: 340px;
+      }
+
+      .SurPlace-goldItem span {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: rgba(27, 27, 27, 0.4);
+      }
+
+      .SurPlace-sessions {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .SurPlace-session {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 22px 28px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .SurPlace-sessionHeader {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .SurPlace-sessionTag {
+        flex-shrink: 0;
+        font-size: 0.65rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: #ffdd00;
+        color: #1b1b1b;
+      }
+
+      .SurPlace-sessionTime {
+        font-variant-numeric: tabular-nums;
+        font-size: 1.8rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+      }
+
+      .SurPlace-sessionNames {
+        font-size: 1.15rem;
+        font-weight: 600;
+        line-height: 1.35;
+        color: rgba(255, 255, 255, 0.85);
       }
 
       /* =========================
