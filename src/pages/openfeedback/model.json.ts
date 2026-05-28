@@ -44,7 +44,7 @@ export const GET: APIRoute = async () => {
       endTime: s.endTime,
       trackTitle,
     };
-    if (!hasSpeakers) {
+    if (!hasSpeakers && !s.title.startsWith("Table Ronde")) {
       session.hideInFeedback = true;
     }
     sessions[s.id] = session;
