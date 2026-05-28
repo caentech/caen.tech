@@ -256,7 +256,7 @@
     "description": "",
     "speakerIds": [],
     "startTime": "2026-06-09T16:30:00.000+02:00",
-    "endTime": "2026-06-09T17:00:00.000+02:00",
+    "endTime": "2026-06-09T16:45:00.000+02:00",
     "roomId": "all",
     "theme": "Networking",
     "level": "débutant",
@@ -269,8 +269,8 @@
     "speakerIds": [
       "francois-nikolenko"
     ],
-    "startTime": "2026-06-09T17:00:00.000+02:00",
-    "endTime": "2026-06-09T17:45:00.000+02:00",
+    "startTime": "2026-06-09T16:45:00.000+02:00",
+    "endTime": "2026-06-09T17:30:00.000+02:00",
     "roomId": "auditorium",
     "theme": "UX / UI & Design Produit",
     "level": "intermédiaire",
@@ -283,10 +283,22 @@
     "speakerIds": [
       "ivan-dalmet"
     ],
-    "startTime": "2026-06-09T17:00:00.000+02:00",
-    "endTime": "2026-06-09T17:45:00.000+02:00",
+    "startTime": "2026-06-09T16:45:00.000+02:00",
+    "endTime": "2026-06-09T17:30:00.000+02:00",
     "roomId": "conference",
     "theme": "UX / UI & Design Produit",
+    "level": "débutant",
+    "type": "conférence"
+  },
+  {
+    "id": "pause-17h30",
+    "title": "Pause",
+    "description": "",
+    "speakerIds": [],
+    "startTime": "2026-06-09T17:30:00.000+02:00",
+    "endTime": "2026-06-09T17:45:00.000+02:00",
+    "roomId": "all",
+    "theme": "Networking",
     "level": "débutant",
     "type": "conférence"
   },
