@@ -24,9 +24,9 @@
     "type": "conférence"
   },
   {
-    "id": "keynote-titre-prochainement-annonce",
-    "title": "Keynote : Titre prochainement annoncé",
-    "description": "<p>Annonce prochaine </p>",
+    "id": "keynote-avons-nous-encore-le-temps-d-etre-humains",
+    "title": "Keynote : Avons-nous encore le temps d’être humains ?",
+    "description": "<p>Des lieux où chaque seconde peut changer une vie aux infrastructures invisibles qui accélèrent nos mondes numériques, cette keynote propose un voyage sensible à travers les machines, les urgences et les émotions. À l’heure où l’intelligence artificielle promet d’aller plus vite que nous, une question demeure : ce temps que nous gagnons, saurons-nous encore lui donner du sens ?</p>",
     "speakerIds": [
       "emmanuel-assie"
     ],

@@ -16,6 +16,11 @@ const navLinks = [
   { href: "/podcasts", label: "Podcasts" },
   { href: "/contact", label: "Contact" },
   { href: "/charte-graphique", label: "Charte graphique" },
+  {
+    href: "https://docs.google.com/document/d/1s9xcqXfhlqlMCSWdwYT0EQvMF7HGkD6Eg9E19xqbXjw/edit?usp=sharing",
+    label: "Code de conduite",
+    external: true,
+  },
 ];
 ---
 
@@ -30,8 +35,16 @@ const navLinks = [
 
     <nav class="Footer-nav" aria-label="Navigation pied de page">
       <ul class="Footer-navList">
-        {navLinks.map(({ href, label }) => (
-          <li><a href={href} class="Footer-navLink">{label}</a></li>
+        {navLinks.map(({ href, label, external }) => (
+          <li>
+            <a
+              href={href}
+              class="Footer-navLink"
+              {...(external ? { target: "_blank", rel: "noopener" } : {})}
+            >
+              {label}
+            </a>
+          </li>
         ))}
       </ul>
     </nav>
