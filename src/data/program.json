@@ -109,7 +109,7 @@
     "title": "De 6 mois à 2 jours : la révolution LLM pour le traitement documentaire",
     "description": "<p>Classifier et extraire les données de milliers, voire de millions de documents, c&#39;était <strong>6 mois de développement</strong>, une équipe de ML engineers et d&#39;annotateurs externes, des dizaines de milliers d&#39;images annotées et un budget à six chiffres.</p>\n<p>Aujourd&#39;hui, un LLM multimodal fait le même travail en <strong>quelques jours</strong>, sans dataset et sans entraînement.</p>\n<p>Trop beau pour être vrai ? Dans cette <strong>démo live</strong>, je vous montre exactement comment ça fonctionne sur un cas réel de KYC bancaire, par exemple CNI, passeports, justificatifs, RIB, et surtout, comment on évite que le modèle <strong>hallucine</strong> sur vos données les plus sensibles.</p>",
     "speakerIds": [
-      "vinorth-varatharasan"
+      "vinorth"
     ],
     "startTime": "2026-06-09T11:15:00.000+02:00",
     "endTime": "2026-06-09T12:00:00.000+02:00",
@@ -147,12 +147,18 @@
   {
     "id": "table-ronde-ia-outil-magique-ou-dette-technique-deguisee",
     "title": "Table Ronde : \"IA : Outil magique ou dette technique déguisée ?\"",
-    "description": "Table Ronde : \"IA : Outil magique ou dette technique déguisée ?\"",
-    "speakerIds": [],
+    "description": "<p>Gain de productivité immédiat ou dette technique à retardement ? Code qu&#39;on maîtrise mal, dépendances nouvelles, coûts cachés, érosion de l&#39;expertise interne : derrière les promesses de l&#39;IA, on réunit des intervenantes et intervenants de l&#39;écosystème normand pour un échange sincère, fait de retours d&#39;expérience concrets et de désaccords assumés, sur ce que l&#39;IA apporte vraiment et sur ce qu&#39;elle nous coûte.</p>",
+    "speakerIds": [
+      "ludivine-bigot",
+      "pierre-lepetit",
+      "ambroise-carriere",
+      "baptiste-manson",
+      "quentin-deslandes"
+    ],
     "startTime": "2026-06-09T13:30:00.000+02:00",
     "endTime": "2026-06-09T14:15:00.000+02:00",
     "roomId": "auditorium",
-    "theme": "Événement",
+    "theme": "Autres",
     "level": "débutant",
     "type": "conférence"
   },
