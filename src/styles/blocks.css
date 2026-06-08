@@ -161,6 +161,76 @@
   border-color: var(--color-bg-dark);
 }
 
+/* Disabled button — keeps its base colors on hover, signals non-clickable */
+.Btn.disabled,
+.Btn.disabled:hover {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
+
+.Btn.primary.disabled:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  border-color: var(--color-primary);
+}
+
+.Btn.dark.disabled:hover {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+  border-color: var(--color-bg-dark);
+}
+
+/* --- Tooltip — CSS-only, shown on hover/focus of any [data-tooltip] --- */
+[data-tooltip] {
+  position: relative;
+}
+
+/* Bubble */
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-0.35rem);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+  box-shadow: var(--shadow-md);
+  z-index: 20;
+}
+
+/* Pointer — points down from the bubble toward the button, overlapping the
+   bubble slightly so there is no visible seam between the two */
+[data-tooltip]::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 0.45rem solid transparent;
+  border-bottom-width: 0;
+  border-top-color: var(--color-text);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+  z-index: 21;
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before,
+[data-tooltip]:focus-visible::after,
+[data-tooltip]:focus-visible::before {
+  opacity: 1;
+}
+
 /* --- .Card — Generic card --- */
 .Card {
   background-color: var(--color-bg);
@@ -314,6 +384,32 @@ a.Card:hover,
 .Header-navLink:hover,
 .Header-navLink.active {
   background-color: var(--color-primary);
+}
+
+.Header-navLink.disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.Header-navLink.disabled:hover {
+  background-color: transparent;
+}
+
+/* Header sits at the top — show its tooltip below to avoid clipping */
+.Header-navLink[data-tooltip]::after {
+  top: 100%;
+  bottom: auto;
+  transform: translateX(-50%) translateY(0.35rem);
+}
+
+/* Flip the pointer to point up toward the nav item */
+.Header-navLink[data-tooltip]::before {
+  top: 100%;
+  bottom: auto;
+  border-top-width: 0;
+  border-bottom-width: 0.45rem;
+  border-top-color: transparent;
+  border-bottom-color: var(--color-text);
 }
 
 .Header-social {
