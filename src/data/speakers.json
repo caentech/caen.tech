@@ -80,12 +80,12 @@
     "photo": "/images/speakers/ivan-dalmet.jpg"
   },
   {
-    "id": "vinorth",
-    "name": "Vinorth",
+    "id": "vinorth-varatharasan",
+    "name": "Vinorth Varatharasan",
     "role": "",
     "company": "OCTO Technology",
     "bio": "Senior Data Scientist et Tech Lead chez OCTO Technology. 7 ans d'expérience en Data : Computer Vision, LLM/GenAI, MLOps. Actuellement en mission dans le secteur bancaire, je conçois des pipelines de traitement documentaire avec des LLM multimodaux. Diplômé en robotique (UTC) et véhicules autonomes (Cranfield University, UK), auteur de publications IEEE (60+ citations). Auteur sur le blog OCTO et speaker à La Grosse Conf 2026.",
-    "photo": "/images/speakers/vinorth.jpg"
+    "photo": "/images/speakers/vinorth-varatharasan.jpg"
   },
   {
     "id": "romuald-poretti",
