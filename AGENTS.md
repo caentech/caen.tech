@@ -12,6 +12,13 @@ The site is fully static (Astro, static output). Content lives in `src/data/*.js
 
 Always ignore `.plans` and `.local` directories when searching the codebase.
 
+## Verifying changes
+
+Visual or behavioral changes can be verified end-to-end by running the dev
+server with `make run` (starts Astro on http://localhost:4321) and driving the
+page with the Playwright MCP tools — navigate, snapshot, click, and screenshot
+to confirm the change works in the real browser before considering it done.
+
 ## Docfront - Seek Documentation and Skills
 
 **Before any investigation or code exploration**, run `npm run docfront` to list the documentation index. This is mandatory for every task — do not skip it. Browse relevant subdirectories (`npm run docfront -- --dir topic-a --dir topic-b/sub-topic-c`) or list everything (`npm run docfront -- --recursive`).

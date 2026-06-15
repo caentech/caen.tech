@@ -46,13 +46,9 @@ const illustrations = [
   <section class="Section">
     <div class="Wrap">
       <h1>Photos</h1>
-      <p class="PhotosIntro">Revivez l'édition Caen.Tech en images : les photos de la journée et les dessins réalisés en direct pendant les conférences.</p>
-    </div>
-  </section>
+      <p class="Section-intro PhotosIntro">Revivez l'édition Caen.Tech en images : les photos de la journée et les dessins réalisés en direct pendant les conférences.</p>
 
-  <section class="Section">
-    <div class="Wrap">
-      <h2>Les photos de la journée</h2>
+      <h2 class="Section-title PhotosGallery-heading">Les photos de la journée</h2>
       <div class="PhotoGallery PhotoGallery--dense" data-photo-gallery>
         {photos.map((src, i) => (
           <a class="PhotoGallery-item Card" href={src} data-photo-trigger aria-label={`Agrandir la photo ${i + 1} sur ${photos.length}`}>
@@ -65,15 +61,15 @@ const illustrations = [
 
   <section class="Section alt">
     <div class="Wrap">
-      <h2>Les illustrations des conférences</h2>
+      <h2 class="Section-title">Les illustrations des conférences</h2>
       <p class="PhotosCredit">
         Sketchnotes réalisées en direct par
         <a href="https://francoisboissel.fr" target="_blank" rel="noopener">François Boissel</a>.
       </p>
-      <div class="PhotoGallery">
+      <div class="PhotoGallery" data-photo-gallery>
         {illustrations.map(({ src, title }) => (
           <figure class="PhotoGallery-item Card">
-            <a href={src} target="_blank" rel="noopener" aria-label={`Voir l'illustration en grand : ${title}`}>
+            <a href={src} data-photo-trigger aria-label={`Voir l'illustration en grand : ${title}`}>
               <img class="PhotoGallery-image" src={src} alt={`Sketchnote de la conférence « ${title} »`} width="1600" height="900" loading="lazy" />
             </a>
             <figcaption class="PhotoGallery-caption">{title}</figcaption>
@@ -110,8 +106,16 @@ const illustrations = [
     max-width: 60ch;
   }
 
+  /* Sépare le bloc d'intro de la galerie sans recréer le double
+     espacement inter-sections d'origine. */
+  .PhotosGallery-heading {
+    margin-top: var(--space-xl);
+  }
+
   .PhotosCredit {
     color: var(--color-text-light);
+    /* Rapproche le crédit de son titre (comme un sous-titre). */
+    margin-top: calc(-1 * var(--space-md));
     margin-bottom: var(--space-lg);
   }
 
@@ -145,6 +149,7 @@ const illustrations = [
 
   .PhotoGallery-item a {
     display: block;
+    cursor: zoom-in;
   }
 
   .PhotoGallery-image {

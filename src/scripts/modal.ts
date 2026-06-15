@@ -15,6 +15,7 @@ interface TalkData {
   theme: string;
   level: string;
   type: string;
+  photos: string[];
 }
 
 const modal = document.getElementById("talk-modal")!;
@@ -71,6 +72,18 @@ function populateModal(talk: TalkData) {
         </div>
       </div>
     `;
+  }
+
+  if (talk.photos.length > 0) {
+    let photosHtml = `
+      <h3 class="Modal-photosTitle">En images</h3>
+      <div class="Modal-photos">
+    `;
+    for (const src of talk.photos) {
+      photosHtml += `<a class="Modal-photo" href="${escapeHtml(src)}" target="_blank" rel="noopener" aria-label="Voir la photo en grand"><img src="${escapeHtml(src)}" alt="Photo prise pendant « ${escapeHtml(talk.title)} »" width="400" height="267" loading="lazy" /></a>`;
+    }
+    photosHtml += "</div>";
+    bodyHtml += photosHtml;
   }
 
   modalBody.innerHTML = bodyHtml;

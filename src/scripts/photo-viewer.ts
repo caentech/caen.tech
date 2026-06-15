@@ -1,6 +1,13 @@
-// Visionneuse plein écran (lightbox) pour les photos de la journée.
-// Le clic sur une vignette ouvre la photo en grand sans quitter le site ;
-// les flèches gauche/droite (clavier ou boutons) naviguent entre les photos.
+// Visionneuse plein écran (lightbox) partagée par les galeries de la page.
+// Le clic sur une vignette ouvre l'image en grand sans quitter le site ;
+// les flèches gauche/droite (clavier ou boutons) naviguent au sein de la
+// galerie cliquée. Chaque conteneur `[data-photo-gallery]` (photos de la
+// journée, illustrations…) constitue son propre ensemble de navigation.
+
+interface Photo {
+  src: string;
+  alt: string;
+}
 
 const lightbox = document.getElementById("photo-lightbox");
 const image = document.getElementById("lightbox-image") as HTMLImageElement | null;
@@ -9,15 +16,8 @@ const counter = document.getElementById("lightbox-counter");
 if (lightbox && image) {
   const closeBtn = lightbox.querySelector<HTMLButtonElement>("[data-lightbox-close]");
 
-  const triggers = Array.from(
-    document.querySelectorAll<HTMLAnchorElement>("[data-photo-gallery] [data-photo-trigger]")
-  );
-
-  const photos = triggers.map((trigger) => ({
-    src: trigger.getAttribute("href") || "",
-    alt: trigger.querySelector("img")?.getAttribute("alt") || "",
-  }));
-
+  // Ensemble de photos actuellement affiché (celui de la galerie cliquée).
+  let photos: Photo[] = [];
   let current = 0;
   let lastFocused: HTMLElement | null = null;
 
@@ -37,7 +37,8 @@ if (lightbox && image) {
     preload(current - 1);
   }
 
-  function open(index: number) {
+  function open(galleryPhotos: Photo[], index: number) {
+    photos = galleryPhotos;
     lastFocused = document.activeElement as HTMLElement;
     show(index);
     lightbox!.classList.add("open");
@@ -57,10 +58,26 @@ if (lightbox && image) {
 
   const isOpen = () => lightbox!.classList.contains("open");
 
-  triggers.forEach((trigger, index) => {
-    trigger.addEventListener("click", (e) => {
-      e.preventDefault();
-      open(index);
+  // Chaque galerie est indépendante : ses vignettes ouvrent la visionneuse
+  // sur son propre ensemble de photos.
+  const galleries = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-photo-gallery]")
+  );
+
+  galleries.forEach((gallery) => {
+    const triggers = Array.from(
+      gallery.querySelectorAll<HTMLAnchorElement>("[data-photo-trigger]")
+    );
+    const galleryPhotos: Photo[] = triggers.map((trigger) => ({
+      src: trigger.getAttribute("href") || "",
+      alt: trigger.querySelector("img")?.getAttribute("alt") || "",
+    }));
+
+    triggers.forEach((trigger, index) => {
+      trigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        open(galleryPhotos, index);
+      });
     });
   });
 

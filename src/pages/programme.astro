@@ -5,6 +5,7 @@ import TalkModal from "../components/TalkModal.astro";
 import SpeakerList from "../components/SpeakerList.astro";
 import SpeakerModal from "../components/SpeakerModal.astro";
 import { getCollection } from "astro:content";
+import sessionPhotos from "../data/session-photos.json";
 
 // Load data
 const allProgram = await getCollection("program");
@@ -166,6 +167,9 @@ const talksJson = allProgram.map((p) => ({
   theme: p.data.theme,
   level: p.data.level,
   type: p.data.type,
+  // Photos rattachées à la session par recoupement des dates EXIF
+  // (voir scripts/generate-session-photos.py). Peut être vide.
+  photos: (sessionPhotos as Record<string, string[]>)[p.data.id] ?? [],
 }));
 ---
 
