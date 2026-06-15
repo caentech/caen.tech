@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #ffffff; }
+  #board {
+    width: 1600px;
+    padding: 90px 80px;
+    background: #ffffff;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+  }
+  .logo {
+    width: 270px;
+    height: 185px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo img {
+    object-fit: contain;
+    display: block;
+    width: auto; height: auto;
+    max-height: 185px;
+    max-width: 100%;
+  }
+  /* Wide text-based logo with small intrinsic size: scale up to fill the box */
+  .logo--wide img {
+    width: 100%;
+    max-height: 130px;
+  }
+</style>
+</head>
+<body>
+<div id="board">
+  <div class="row">
+    <div class="logo"><img src="../public/images/partners/eventozor.svg" alt="Eventozor"></div>
+    <div class="logo"><img src="../public/images/partners/moho.svg" alt="MoHo"></div>
+    <div class="logo"><img src="../public/images/partners/m2-event.webp" alt="M2 Event"></div>
+    <div class="logo"><img src="show-me-the-rex-trim.webp" alt="Show me the REX"></div>
+    <div class="logo"><img src="../public/images/partners/appel-cyber-juin.webp" alt="L'Appel du Cyber Juin"></div>
+  </div>
+</div>
+</body>
+</html>

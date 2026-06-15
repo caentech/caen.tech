@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #ffffff; }
+  #board {
+    width: 1600px;
+    padding: 70px 80px 90px;
+    background: #ffffff;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .tier {
+    margin-bottom: 64px;
+  }
+  .tier:last-child { margin-bottom: 0; }
+  .tier__label {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 34px;
+    position: relative;
+  }
+  .tier__label span { background: #fff; padding: 0 22px; position: relative; z-index: 1; }
+  .tier__label::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 50%;
+    height: 2px;
+  }
+  .tier--gold .tier__label { color: #b8860b; }
+  .tier--gold .tier__label::before { background: linear-gradient(90deg, transparent, #e8c84d, transparent); }
+  .tier--silver .tier__label { color: #7d7d7d; }
+  .tier--silver .tier__label::before { background: linear-gradient(90deg, transparent, #c4c4c4, transparent); }
+  .tier--bronze .tier__label { color: #a0623a; }
+  .tier--bronze .tier__label::before { background: linear-gradient(90deg, transparent, #d7a07a, transparent); }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px 56px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo img {
+    object-fit: contain;
+    display: block;
+    width: auto; height: auto;
+    max-width: 100%; max-height: 100%;
+  }
+
+  .tier--gold .logo { width: 540px; height: 195px; }
+  .tier--silver .logo { width: 400px; height: 145px; }
+  .tier--bronze .logo { width: 270px; height: 110px; }
+</style>
+</head>
+<body>
+<div id="board">
+
+  <div class="tier tier--gold">
+    <div class="tier__label"><span>Gold</span></div>
+    <div class="row">
+      <div class="logo"><img src="../public/images/sponsors/veolia.svg" alt="Veolia Flexcity"></div>
+      <div class="logo"><img src="../public/images/sponsors/actilium-deepthought.webp" alt="Actilium & Deepthought Solutions"></div>
+    </div>
+  </div>
+
+  <div class="tier tier--silver">
+    <div class="tier__label"><span>Silver</span></div>
+    <div class="row">
+      <div class="logo"><img src="../public/images/sponsors/normandie-numerique.webp" alt="Normandie Numérique"></div>
+      <div class="logo"><img src="../public/images/sponsors/supinfo.webp" alt="Supinfo"></div>
+    </div>
+  </div>
+
+  <div class="tier tier--bronze">
+    <div class="tier__label"><span>Bronze</span></div>
+    <div class="row">
+      <div class="logo"><img src="../public/images/sponsors/legallais.webp" alt="Legallais"></div>
+      <div class="logo"><img src="../public/images/sponsors/normandie-french-tech.webp" alt="Normandie French Tech"></div>
+      <div class="logo"><img src="../public/images/sponsors/redlab.webp" alt="RedLab"></div>
+      <div class="logo"><img src="../public/images/sponsors/sii.svg" alt="SII"></div>
+      <div class="logo"><img src="../public/images/sponsors/you-switch.webp" alt="YouSwitch"></div>
+      <div class="logo"><img src="../public/images/sponsors/cloud-temple.webp" alt="Cloud Temple"></div>
+      <div class="logo"><img src="../public/images/sponsors/le-village-by-ca.svg" alt="Le Village By CA"></div>
+      <div class="logo"><img src="../public/images/sponsors/shodo.svg" alt="Shodo"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
