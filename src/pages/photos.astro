@@ -1,0 +1,277 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import { X, ChevronLeft, ChevronRight } from "lucide-astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Photos de la journée : auto-découverte des fichiers.
+// Pour en ajouter, il suffit de déposer les fichiers optimisés dans
+// `public/images/photos/` (voir docs/images.md) — aucune édition de code requise.
+const photosDir = path.join(process.cwd(), "public/images/photos");
+const photos = fs
+  .readdirSync(photosDir)
+  .filter((file) => /^photo-\d+\.webp$/.test(file))
+  .sort((a, b) => parseInt(a.match(/\d+/)![0], 10) - parseInt(b.match(/\d+/)![0], 10))
+  .map((file) => `/images/photos/${file}`);
+
+const illustrations = [
+  {
+    src: "/images/photos/illustration-keynote-1.webp",
+    title: "Keynote : Avons-nous encore le temps d’être humains ?",
+  },
+  {
+    src: "/images/photos/illustration-keynote-2.webp",
+    title: "Dynamique de frappe au clavier : du laboratoire aux applications industrielles",
+  },
+  {
+    src: "/images/photos/illustration-keynote-3.webp",
+    title: "Souveraineté numérique et transition écologique : comment un territoire peut (re)prendre le pouvoir sur ses données ?",
+  },
+  {
+    src: "/images/photos/illustration-keynote-4.webp",
+    title: "De pionnières à invisibles : où sont passées les femmes dans l’informatique ?",
+  },
+  {
+    src: "/images/photos/illustration-keynote-5.webp",
+    title: "De l'open data à la ville : un urbaniste bidouilleur témoigne",
+  },
+  {
+    src: "/images/photos/illustration-keynote-6.webp",
+    title: "The Blind Designer — Construire des produits pour Airbnb, Uber ou Younited en perdant progressivement la vue",
+  },
+];
+---
+
+<BaseLayout title="Photos — Caen.Tech" description="Les photos et illustrations de la conférence Caen.Tech : revivez l'édition en images.">
+  <section class="Section">
+    <div class="Wrap">
+      <h1>Photos</h1>
+      <p class="PhotosIntro">Revivez l'édition Caen.Tech en images : les photos de la journée et les dessins réalisés en direct pendant les conférences.</p>
+    </div>
+  </section>
+
+  <section class="Section">
+    <div class="Wrap">
+      <h2>Les photos de la journée</h2>
+      <div class="PhotoGallery PhotoGallery--dense" data-photo-gallery>
+        {photos.map((src, i) => (
+          <a class="PhotoGallery-item Card" href={src} data-photo-trigger aria-label={`Agrandir la photo ${i + 1} sur ${photos.length}`}>
+            <img class="PhotoGallery-image" src={src} alt={`Photo de la journée Caen.Tech (${i + 1})`} width="1200" height="800" loading="lazy" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="Section alt">
+    <div class="Wrap">
+      <h2>Les illustrations des conférences</h2>
+      <p class="PhotosCredit">
+        Sketchnotes réalisées en direct par
+        <a href="https://francoisboissel.fr" target="_blank" rel="noopener">François Boissel</a>.
+      </p>
+      <div class="PhotoGallery">
+        {illustrations.map(({ src, title }) => (
+          <figure class="PhotoGallery-item Card">
+            <a href={src} target="_blank" rel="noopener" aria-label={`Voir l'illustration en grand : ${title}`}>
+              <img class="PhotoGallery-image" src={src} alt={`Sketchnote de la conférence « ${title} »`} width="1600" height="900" loading="lazy" />
+            </a>
+            <figcaption class="PhotoGallery-caption">{title}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Visionneuse plein écran pour les photos de la journée -->
+  <div class="Lightbox" id="photo-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visionneuse de photos">
+    <div class="Lightbox-overlay" data-lightbox-close></div>
+    <button class="Lightbox-close" data-lightbox-close type="button" aria-label="Fermer la visionneuse">
+      <X size={28} />
+    </button>
+    <button class="Lightbox-nav prev" data-lightbox-prev type="button" aria-label="Photo précédente">
+      <ChevronLeft size={32} />
+    </button>
+    <figure class="Lightbox-figure">
+      <img class="Lightbox-image" id="lightbox-image" src="" alt="" />
+      <figcaption class="Lightbox-counter" id="lightbox-counter"></figcaption>
+    </figure>
+    <button class="Lightbox-nav next" data-lightbox-next type="button" aria-label="Photo suivante">
+      <ChevronRight size={32} />
+    </button>
+  </div>
+
+  <script src="../scripts/photo-viewer.ts"></script>
+</BaseLayout>
+
+<style>
+  .PhotosIntro {
+    color: var(--color-text-light);
+    max-width: 60ch;
+  }
+
+  .PhotosCredit {
+    color: var(--color-text-light);
+    margin-bottom: var(--space-lg);
+  }
+
+  .PhotoGallery {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .PhotoGallery {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Grille dense pour les photos de la journée : s'adapte au nombre de photos
+     (de quelques-unes à plusieurs dizaines) et aux orientations mixtes. */
+  .PhotoGallery--dense {
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+
+  .PhotoGallery--dense .PhotoGallery-image {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
+  .PhotoGallery-item {
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .PhotoGallery-item a {
+    display: block;
+  }
+
+  .PhotoGallery-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: var(--transition);
+  }
+
+  .PhotoGallery-item a:hover .PhotoGallery-image,
+  a.PhotoGallery-item:hover .PhotoGallery-image {
+    transform: scale(1.02);
+  }
+
+  a.PhotoGallery-item {
+    cursor: zoom-in;
+  }
+
+  .PhotoGallery-caption {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-xs);
+    color: var(--color-text-light);
+  }
+
+  /* =============================================
+     .Lightbox — Visionneuse plein écran des photos
+     ============================================= */
+  .Lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+  }
+
+  .Lightbox.open {
+    display: flex;
+  }
+
+  .Lightbox-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+
+  .Lightbox-figure {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .Lightbox-image {
+    display: block;
+    max-width: min(90vw, 1600px);
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .Lightbox-counter {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: var(--text-sm);
+  }
+
+  .Lightbox-close,
+  .Lightbox-nav {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 50%;
+    transition: background-color var(--transition);
+  }
+
+  .Lightbox-close:hover,
+  .Lightbox-nav:hover {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+
+  .Lightbox-close {
+    top: var(--space-md);
+    right: var(--space-md);
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .Lightbox-nav {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .Lightbox-nav.prev {
+    left: var(--space-md);
+  }
+
+  .Lightbox-nav.next {
+    right: var(--space-md);
+  }
+
+  @media (max-width: 768px) {
+    .Lightbox-nav {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .Lightbox-nav.prev {
+      left: var(--space-xs);
+    }
+
+    .Lightbox-nav.next {
+      right: var(--space-xs);
+    }
+  }
+</style>

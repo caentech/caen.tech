@@ -9,10 +9,10 @@ const site = siteEntry!.data;
 
 const navLinks = [
   { href: "/", label: "Accueil" },
-  { href: site.billetterieUrl, label: "Billetterie", external: true, disabled: true },
   { href: "/programme", label: "Programme" },
   { href: "/infos-pratiques", label: "Infos pratiques" },
   { href: "/sponsors", label: "Sponsors" },
+  { href: "/photos", label: "Photos" },
   { href: "/a-propos", label: "À propos" },
   { href: "/podcasts", label: "Podcasts" },
   { href: "/contact", label: "Contact" },
@@ -29,21 +29,11 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 
     <nav class="Header-nav" id="main-nav" aria-label="Navigation principale">
       <ul class="Header-navList">
-        {navLinks.map(({ href, label, external, disabled }) => (
+        {navLinks.map(({ href, label }) => (
           <li>
-            {disabled ? (
-              <span class="Header-navLink disabled" role="button" aria-disabled="true" data-tooltip="complet !">
-                {label}
-              </span>
-            ) : (
-              <a
-                href={href}
-                class:list={["Header-navLink", { active: !external && currentPath === href }]}
-                {...(external ? { target: "_blank", rel: "noopener" } : {})}
-              >
-                {label}
-              </a>
-            )}
+            <a href={href} class:list={["Header-navLink", { active: currentPath === href }]}>
+              {label}
+            </a>
           </li>
         ))}
       </ul>
