@@ -3,6 +3,7 @@ import { getEntry } from "astro:content";
 import IconLinkedin from "./icons/IconLinkedin.astro";
 import IconDiscord from "./icons/IconDiscord.astro";
 import IconWhatsapp from "./icons/IconWhatsapp.astro";
+import IconYoutube from "./icons/IconYoutube.astro";
 
 const siteEntry = await getEntry("site", "caen-tech-2026");
 const site = siteEntry!.data;
@@ -58,6 +59,9 @@ const navLinks = [
       </a>
       <a href={site.socialLinks.whatsapp} target="_blank" aria-label="WhatsApp">
         <IconWhatsapp size={20} />
+      </a>
+      <a href={site.socialLinks.youtube} target="_blank" aria-label="YouTube">
+        <IconYoutube size={20} />
       </a>
     </div>
 

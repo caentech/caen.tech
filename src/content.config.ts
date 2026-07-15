@@ -17,6 +17,7 @@ const site = defineCollection({
       linkedin: z.string().url(),
       discord: z.string().url(),
       whatsapp: z.string().url(),
+      youtube: z.string().url(),
     }),
     billetterieUrl: z.string().url(),
     email: z.string().email(),
