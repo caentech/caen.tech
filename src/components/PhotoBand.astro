@@ -1,0 +1,96 @@
+---
+// Bandeau pleine largeur qui fait défiler les photos de l'édition précédente,
+// de la droite vers la gauche, en boucle continue.
+//
+// Les images sont des versions allégées des photos de `public/images/photos/`,
+// dimensionnées pour la hauteur du bandeau (voir scripts/generate-band-photos.py).
+const photos = [
+  { n: 2, alt: "L'accueil des participant·es par les bénévoles Caen.Tech" },
+  { n: 6, alt: "L'amphithéâtre plein pendant une conférence" },
+  { n: 11, alt: "Un bénévole prépare le buffet du déjeuner" },
+  { n: 16, alt: "Une table ronde sur scène" },
+  { n: 25, alt: "Les échanges entre participant·es pendant une pause" },
+  { n: 29, alt: "Un intervenant présente sa conférence" },
+  { n: 34, alt: "Des bénévoles à l'œuvre en coulisses" },
+  { n: 36, alt: "Deux bénévoles en t-shirt Caen.Tech" },
+  { n: 44, alt: "Un intervenant sur scène" },
+  { n: 48, alt: "Le public installé dans la salle" },
+  { n: 53, alt: "Deux participants discutent pendant une pause" },
+  { n: 67, alt: "Le public suit une conférence" },
+  { n: 71, alt: "Les intervenant·es d'une table ronde" },
+  { n: 76, alt: "Une conférence illustrée en direct" },
+];
+
+// La piste contient deux fois la même série : quand la première a entièrement
+// défilé, la seconde est exactement à sa place de départ — la boucle est invisible.
+const track = [...photos, ...photos];
+---
+
+<section class="PhotoBand" aria-label="Caen.Tech en images">
+  <div class="PhotoBand-track">
+    {track.map(({ n, alt }, i) => (
+      <img
+        class="PhotoBand-item"
+        src={`/images/band/photo-${n}.webp`}
+        alt={i < photos.length ? alt : ""}
+        aria-hidden={i >= photos.length ? "true" : undefined}
+        width="660"
+        height="440"
+        decoding="async"
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  .PhotoBand {
+    overflow: hidden;
+    background-color: var(--color-bg-dark);
+  }
+
+  .PhotoBand-track {
+    display: flex;
+    width: max-content;
+    animation: PhotoBand-slide 80s linear infinite;
+  }
+
+  .PhotoBand-item {
+    flex: none;
+    display: block;
+    height: 220px;
+    width: auto;
+  }
+
+  @keyframes PhotoBand-slide {
+    from {
+      transform: translateX(0);
+    }
+    /* -50 % = la longueur d'une série, la seconde prend le relais au pixel près */
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Laisse le temps de regarder une photo au survol */
+  .PhotoBand:hover .PhotoBand-track,
+  .PhotoBand:focus-within .PhotoBand-track {
+    animation-play-state: paused;
+  }
+
+  @media (max-width: 767px) {
+    .PhotoBand-item {
+      height: 140px;
+    }
+  }
+
+  /* Sans animation, le bandeau devient une bande faisable au doigt / à la souris */
+  @media (prefers-reduced-motion: reduce) {
+    .PhotoBand {
+      overflow-x: auto;
+    }
+
+    .PhotoBand-track {
+      animation: none;
+    }
+  }
+</style>
