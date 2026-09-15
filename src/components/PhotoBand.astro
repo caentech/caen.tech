@@ -30,7 +30,7 @@ const track = [...photos, ...photos];
   <div class="PhotoBand-track">
     {track.map(({ n, alt }, i) => (
       <img
-        class="PhotoBand-item"
+        class="PhotoBand-item Card"
         src={`/images/band/photo-${n}.webp`}
         alt={i < photos.length ? alt : ""}
         aria-hidden={i >= photos.length ? "true" : undefined}
@@ -45,7 +45,7 @@ const track = [...photos, ...photos];
 <style>
   .PhotoBand {
     overflow: hidden;
-    background-color: var(--color-bg-dark);
+    padding-block: var(--space-lg);
   }
 
   .PhotoBand-track {
@@ -54,11 +54,15 @@ const track = [...photos, ...photos];
     animation: PhotoBand-slide 80s linear infinite;
   }
 
+  /* L'écart est une marge et non un `gap` : il fait ainsi partie de la largeur
+     de chaque vignette, et les deux séries restent de longueur identique — sans
+     quoi la boucle dériverait d'un demi-écart à chaque tour. */
   .PhotoBand-item {
     flex: none;
     display: block;
     height: 220px;
     width: auto;
+    margin-right: var(--space-md);
   }
 
   @keyframes PhotoBand-slide {
@@ -80,6 +84,7 @@ const track = [...photos, ...photos];
   @media (max-width: 767px) {
     .PhotoBand-item {
       height: 140px;
+      margin-right: var(--space-sm);
     }
   }
 
