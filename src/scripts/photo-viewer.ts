@@ -79,6 +79,14 @@ if (lightbox && image) {
         open(galleryPhotos, index);
       });
     });
+
+    // Arrivée depuis un lien du type /photos#photo-6 (bandeau de l'accueil,
+    // lien partagé…) : la visionneuse s'ouvre directement sur cette photo.
+    const targetId = window.location.hash.slice(1);
+    if (targetId) {
+      const index = triggers.findIndex((trigger) => trigger.id === targetId);
+      if (index !== -1) open(galleryPhotos, index);
+    }
   });
 
   lightbox.addEventListener("click", (e) => {

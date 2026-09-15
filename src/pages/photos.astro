@@ -51,7 +51,7 @@ const illustrations = [
       <h2 class="Section-title PhotosGallery-heading">Les photos de la journée</h2>
       <div class="PhotoGallery PhotoGallery--dense" data-photo-gallery>
         {photos.map((src, i) => (
-          <a class="PhotoGallery-item Card" href={src} data-photo-trigger aria-label={`Agrandir la photo ${i + 1} sur ${photos.length}`}>
+          <a class="PhotoGallery-item Card" id={src.split("/").pop()!.replace(".webp", "")} href={src} data-photo-trigger aria-label={`Agrandir la photo ${i + 1} sur ${photos.length}`}>
             <img class="PhotoGallery-image" src={src} alt={`Photo de la journée Caen.Tech (${i + 1})`} width="1200" height="800" loading="lazy" />
           </a>
         ))}
@@ -145,6 +145,8 @@ const illustrations = [
   .PhotoGallery-item {
     margin: 0;
     overflow: hidden;
+    /* Une photo ciblée par son ancre ne doit pas finir sous l'en-tête fixe. */
+    scroll-margin-top: calc(var(--header-height) + var(--space-lg));
   }
 
   .PhotoGallery-item a {
