@@ -5,12 +5,14 @@ import { Mail } from "lucide-astro";
 import IconLinkedin from "../components/icons/IconLinkedin.astro";
 import IconDiscord from "../components/icons/IconDiscord.astro";
 import IconWhatsapp from "../components/icons/IconWhatsapp.astro";
+import SponsoringCall from "../components/SponsoringCall.astro";
 
 const siteEntry = await getEntry("site", "caen-tech-2026");
 const site = siteEntry!.data;
 ---
 
 <BaseLayout title="Contact — Caen.Tech" description="Contactez l'équipe Caen.Tech par email ou via nos réseaux sociaux.">
+  <SponsoringCall />
   <section class="Section">
     <div class="Wrap narrow Contact-header">
       <h1>Contact</h1>

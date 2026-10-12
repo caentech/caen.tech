@@ -1,0 +1,71 @@
+---
+import { getEntry } from "astro:content";
+import { FileDown, Handshake } from "lucide-astro";
+
+const siteEntry = await getEntry("site", "caen-tech-2026");
+const sponsoring = siteEntry!.data.sponsoring;
+---
+
+{
+  sponsoring && (
+    <section class="SponsoringCall _darkBg">
+      <div class="Wrap SponsoringCall-wrap">
+        <p class="SponsoringCall-title">
+          <Handshake size={22} class="SponsoringCall-icon" />
+          <span class="SponsoringCall-kicker">Édition {sponsoring.edition}</span>
+          Nous recherchons nos sponsors
+        </p>
+        <a href={sponsoring.deckUrl} class="Btn primary SponsoringCall-btn" target="_blank" rel="noopener">
+          <FileDown size={18} /> Dossier de sponsoring (PDF)
+        </a>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .SponsoringCall {
+    padding-block: var(--space-md);
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-on-dark);
+  }
+
+  .SponsoringCall-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm) var(--space-lg);
+  }
+
+  .SponsoringCall-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    font-size: var(--text-lg);
+    font-weight: 700;
+  }
+
+  .SponsoringCall-icon {
+    color: var(--color-primary);
+  }
+
+  .SponsoringCall-kicker {
+    padding: 0.1rem var(--space-sm);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    background-color: var(--color-primary);
+    border-radius: 999px;
+  }
+
+  .SponsoringCall-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+</style>

@@ -16,6 +16,10 @@
       "spotify": "https://open.spotify.com/show/7sIHfyCZz5Ns81vP6I1z34"
     },
     "billetterieUrl": "https://event.eventozor.com/CAENTECH26/",
-    "email": "contact@caen.tech"
+    "email": "contact@caen.tech",
+    "sponsoring": {
+      "edition": "2027",
+      "deckUrl": "https://drive.google.com/file/d/1zwn2gnLRkwPEb00sqRorbl5dNrZ_-QPv/view?usp=drive_link"
+    }
   }
 ]

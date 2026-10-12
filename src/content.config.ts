@@ -22,6 +22,12 @@ const site = defineCollection({
     }),
     billetterieUrl: z.string().url(),
     email: z.string().email(),
+    sponsoring: z
+      .object({
+        edition: z.string(),
+        deckUrl: z.string().url(),
+      })
+      .optional(),
   }),
 });
 

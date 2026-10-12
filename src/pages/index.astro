@@ -6,6 +6,7 @@ import SpeakersTeaser from "../components/SpeakersTeaser.astro";
 import VenuePreview from "../components/VenuePreview.astro";
 import SponsorsTeaser from "../components/SponsorsTeaser.astro";
 import CtaFinal from "../components/CtaFinal.astro";
+import SponsoringCall from "../components/SponsoringCall.astro";
 import { getEntry } from "astro:content";
 import { MapPin, Calendar } from "lucide-astro";
 
@@ -14,6 +15,7 @@ const site = siteEntry!.data;
 ---
 
 <BaseLayout title="Caen.Tech | 9 juin 2026 — Conférences tech à Caen" description="Caen.Tech réunit ceux qui font la tech à Caen : développeurs, designers, entrepreneurs. Une journée de conférences au MoHo, le 9 juin 2026.">
+  <SponsoringCall />
   <section class="Hero">
     <div class="Hero-wrap Wrap">
       <img
