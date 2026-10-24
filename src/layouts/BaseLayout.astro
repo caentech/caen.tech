@@ -7,9 +7,10 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description?: string;
+  noindex?: boolean;
 }
 
-const { title, description = "Les rencontres de l'écosystème tech caennais — 9 juin 2026, MoHo, Caen." } = Astro.props;
+const { title, noindex = false, description = "Les rencontres de l'écosystème tech caennais — 9 juin 2026, MoHo, Caen." } = Astro.props;
 
 const siteEntry = await getEntry("site", "caen-tech-2026");
 const site = siteEntry!.data;
@@ -36,6 +37,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />

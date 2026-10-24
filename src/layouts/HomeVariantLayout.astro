@@ -1,8 +1,10 @@
 ---
 // Gabarit commun aux variantes d'intégration des photos sur l'accueil
-// (pages /variantes/N). Il reprend la page d'accueil telle quelle, sauf la zone
-// hero + photos fournie par chaque variante via le slot par défaut, et ajoute
-// un sélecteur flottant pour passer d'une variante à l'autre.
+// (pages /apercu-accueil-a2d0dd/N). L'adresse n'est liée nulle part et les pages
+// sont exclues de l'indexation : elles servent seulement à choisir une variante.
+// Le gabarit reprend la page d'accueil telle quelle, sauf la zone hero + photos
+// fournie par chaque variante via le slot par défaut, et ajoute un sélecteur
+// flottant pour passer d'une variante à l'autre.
 import BaseLayout from "./BaseLayout.astro";
 import WhyAttend from "../components/WhyAttend.astro";
 import ProgramTeaser from "../components/ProgramTeaser.astro";
@@ -27,10 +29,11 @@ const variants = [
   "Mosaïque",
   "Éditorial",
   "Polaroïds",
+  "Bandeau",
 ];
 ---
 
-<BaseLayout title={`Variante ${current} — ${name} | Caen.Tech`}>
+<BaseLayout title={`Variante ${current} — ${name} | Caen.Tech`} noindex>
   <SponsoringCall />
   <slot />
   {!replacesWhyAttend && <WhyAttend />}
@@ -41,11 +44,11 @@ const variants = [
   <CtaFinal />
 
   <nav class="VariantSwitcher" aria-label="Variantes de la page d'accueil">
-    <a class="VariantSwitcher-link" href="/">Actuelle</a>
+    <a class="VariantSwitcher-link" href="/">Sans photos</a>
     {variants.map((label, i) => (
       <a
         class:list={["VariantSwitcher-link", { current: i + 1 === current }]}
-        href={`/variantes/${i + 1}`}
+        href={`/apercu-accueil-a2d0dd/${i + 1}`}
         aria-current={i + 1 === current ? "page" : undefined}
       >
         {i + 1}. {label}
