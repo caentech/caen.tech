@@ -1,0 +1,181 @@
+---
+// Variante 2 — Plein cadre : les photos occupent tout le hero et s'enchaînent
+// en fondu lent ; le coin jaune en diagonale de l'identité visuelle est conservé
+// par-dessus, et le texte se lit sur un voile sombre.
+import HomeVariantLayout from "../../layouts/HomeVariantLayout.astro";
+import { MapPin, Calendar } from "lucide-astro";
+import { getEntry } from "astro:content";
+
+const site = (await getEntry("site", "caen-tech-2026"))!.data;
+
+// Une photo toutes les 6 s ; le délai de chaque calque est posé en CSS (nth-child)
+const slides = [48, 16, 2, 67];
+---
+
+<HomeVariantLayout current={2} name="Plein cadre">
+  <section class="FullBleed">
+    <div class="FullBleed-slides" aria-hidden="true">
+      {slides.map((n, i) => (
+        <img
+          class="FullBleed-slide"
+          src={`/images/photos/photo-${n}.webp`}
+          alt=""
+          width="1600"
+          height="1067"
+          fetchpriority={i === 0 ? "high" : undefined}
+        />
+      ))}
+    </div>
+    <div class="FullBleed-wrap Wrap">
+      <h1 class="FullBleed-title">
+        Une journée pour ceux qui font la <mark class="FullBleed-mark">Tech à Caen</mark>
+      </h1>
+      <p class="FullBleed-subtitle">Conférences, retours d'expérience et rencontres</p>
+      <p class="FullBleed-meta">
+        <span><MapPin size={18} /> {site.venue.name}</span>
+        <span><Calendar size={18} /> 09/06/2026</span>
+      </p>
+      <div class="FullBleed-actions">
+        <a href="https://www.youtube.com/@CaenTech" class="Btn primary" target="_blank" rel="noopener">
+          Accéder aux replays
+        </a>
+        <a href="/programme/2026" class="Btn FullBleed-ghost">Voir le programme</a>
+      </div>
+    </div>
+  </section>
+</HomeVariantLayout>
+
+<style>
+  .FullBleed {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: min(85vh, 720px);
+    padding-block: var(--space-2xl);
+    overflow: hidden;
+    background: var(--color-bg-dark);
+    color: #fff;
+  }
+
+  .FullBleed-slides,
+  .FullBleed-slide {
+    position: absolute;
+    inset: 0;
+  }
+
+  .FullBleed-slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    animation: FullBleed-fade 24s infinite;
+  }
+
+  .FullBleed-slide:nth-child(1) { animation-delay: 0s; }
+  .FullBleed-slide:nth-child(2) { animation-delay: 6s; }
+  .FullBleed-slide:nth-child(3) { animation-delay: 12s; }
+  .FullBleed-slide:nth-child(4) { animation-delay: 18s; }
+
+  /* 24 s pour 4 photos : chacune apparaît, reste ~5 s, puis s'efface en zoomant
+     légèrement pendant que la suivante prend le relais. */
+  @keyframes FullBleed-fade {
+    0% { opacity: 0; transform: scale(1); }
+    5% { opacity: 1; }
+    25% { opacity: 1; }
+    30% { opacity: 0; transform: scale(1.06); }
+    100% { opacity: 0; }
+  }
+
+  /* Voile sombre pour la lisibilité, puis coin jaune et blanc de l'identité */
+  .FullBleed::before,
+  .FullBleed::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .FullBleed::before {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.55) 55%, rgba(0, 0, 0, 0.25));
+  }
+
+  .FullBleed::after {
+    background: linear-gradient(
+      -47deg,
+      var(--color-bg) 0%,
+      var(--color-bg) 12%,
+      var(--color-primary) 12%,
+      var(--color-primary) 16%,
+      transparent 16.3%
+    );
+  }
+
+  .FullBleed-wrap {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    width: 100%;
+  }
+
+  .FullBleed-title {
+    max-width: 20ch;
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .FullBleed-mark {
+    padding-inline: 0.15em;
+    background: var(--color-primary);
+    color: var(--color-text);
+    box-decoration-break: clone;
+  }
+
+  .FullBleed-subtitle {
+    font-size: var(--text-lg);
+    opacity: 0.9;
+  }
+
+  .FullBleed-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-md);
+    font-weight: 600;
+  }
+
+  .FullBleed-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .FullBleed-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .FullBleed-ghost {
+    color: #fff;
+    border-color: #fff;
+  }
+
+  .FullBleed-ghost:hover {
+    background: #fff;
+    color: var(--color-text);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .FullBleed-slide {
+      animation: none;
+    }
+
+    .FullBleed-slide:first-child {
+      opacity: 1;
+    }
+  }
+</style>
