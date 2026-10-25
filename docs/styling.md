@@ -16,7 +16,7 @@ All stylesheets live in `src/styles/`. `global.css` is the entry point and impor
 ```
 global.css      CSS custom properties, reset, base typography (imports all below)
 ├── blocks.css      Reusable Pleasant BEM blocks (.Wrap, .Section, .Grid, .Card…)
-├── hero.css        .Hero block (homepage dark hero)
+├── hero.css        .Hero block (homepage photo hero)
 ├── modal.css       .TalkModal dialog
 └── calendar.css    .Calendar schedule grid
 ```

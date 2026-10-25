@@ -12,38 +12,45 @@ import { MapPin, Calendar } from "lucide-astro";
 
 const siteEntry = await getEntry("site", "caen-tech-2026");
 const site = siteEntry!.data;
+
+// Photos du hero, une toutes les 6 s ; le délai de chaque calque est posé en CSS (nth-child)
+const slides = [6, 16, 49, 79, 52, 54];
 ---
 
 <BaseLayout title="Caen.Tech | 9 juin 2026 — Conférences tech à Caen" description="Caen.Tech réunit ceux qui font la tech à Caen : développeurs, designers, entrepreneurs. Une journée de conférences au MoHo, le 9 juin 2026.">
   <SponsoringCall />
   <section class="Hero">
+    <div class="Hero-slides" aria-hidden="true">
+      {slides.map((n, i) => (
+        <img
+          class="Hero-slide"
+          src={`/images/photos/photo-${n}.webp`}
+          alt=""
+          width="1600"
+          height="1067"
+          fetchpriority={i === 0 ? "high" : undefined}
+        />
+      ))}
+    </div>
     <div class="Hero-wrap Wrap">
-      <img
-        class="Hero-logo"
-        src="/images/logo-bar-white.svg"
-        alt="Caen.Tech"
-        width="280"
-        height="80"
-      />
-      <h1 class="Hero-title">Une journée pour ceux qui font la Tech à Caen</h1>
-      <p class="Hero-subtitle">
-        Conférences, retours d'expérience et rencontres
-      </p>
-      <div class="Hero-meta">
-        <span class="Hero-metaItem"><MapPin size={18} /> {site.venue.name}</span
-        >
+      <h1 class="Hero-title">
+        Une journée pour ceux qui font la <mark class="Hero-mark">Tech à Caen</mark>
+      </h1>
+      <p class="Hero-subtitle">Conférences, retours d'expérience et rencontres</p>
+      <p class="Hero-meta">
+        <span class="Hero-metaItem"><MapPin size={18} /> {site.venue.name}</span>
         <span class="Hero-metaItem"><Calendar size={18} /> 09/06/2026</span>
-      </div>
+      </p>
       <div class="Hero-actions">
         <a
           href="https://www.youtube.com/@CaenTech"
-          class="Btn dark"
+          class="Btn primary"
           target="_blank"
           rel="noopener"
           data-tooltip="Une nouvelle conférence par semaine"
           >Accéder aux replays</a
         >
-        <a href="/programme/2026" class="Btn outline">Voir le programme</a>
+        <a href="/programme/2026" class="Btn Hero-ghost">Voir le programme</a>
       </div>
     </div>
   </section>
