@@ -231,6 +231,15 @@
   opacity: 1;
 }
 
+/* Sur mobile, une bulle centrée sur un bouton aligné à gauche sort de l'écran :
+   on l'aligne sur le bord gauche du bouton (la pointe reste centrée). */
+@media (max-width: 767px) {
+  [data-tooltip]::after {
+    left: 0;
+    transform: translateY(-0.35rem);
+  }
+}
+
 /* --- .Card — Generic card --- */
 .Card {
   background-color: var(--color-bg);
