@@ -1,38 +1,108 @@
 ---
 import { Mic, Users, Brain, Hammer } from "lucide-astro";
+
+const videoId = "ey2cOeJs9H8";
+const videoTitle = "Caen.Tech 2026 vu par ses participants : rencontres, conférences et idées pour 2027";
 ---
 
 <section class="Section alt">
-  <div class="Wrap">
+  <div class="Wrap WhyAttend">
     <h2 class="Section-title">Pourquoi venir ?</h2>
-    <div class="Grid cols2">
-      <div class="WhyAttend-item">
-        <div class="WhyAttend-icon"><Mic size={32} /></div>
-        <h3>Des retours concrets</h3>
-        <p>Pas des pitchs corporate — des retours d'expérience terrain, par des gens qui font la tech au quotidien.</p>
+    <div class="WhyAttend-layout">
+      <div class="Grid cols2">
+        <div class="WhyAttend-item">
+          <div class="WhyAttend-icon"><Mic size={24} /></div>
+          <h3>Des retours concrets</h3>
+          <p>Pas des pitchs corporate — des retours d'expérience terrain, par des gens qui font la tech au quotidien.</p>
+        </div>
+        <div class="WhyAttend-item">
+          <div class="WhyAttend-icon"><Users size={24} /></div>
+          <h3>Une communauté locale, accessible</h3>
+          <p>Un événement à taille humaine, où l'on se croise, on discute, on avance ensemble.</p>
+        </div>
+        <div class="WhyAttend-item">
+          <div class="WhyAttend-icon"><Brain size={24} /></div>
+          <h3>Tech, produit, data, design, infra, entrepreneuriat</h3>
+          <p>Un programme pluridisciplinaire qui reflète la réalité de nos métiers.</p>
+        </div>
+        <div class="WhyAttend-item">
+          <div class="WhyAttend-icon"><Hammer size={24} /></div>
+          <h3>Des gens qui construisent, ici</h3>
+          <p>On met en avant ceux qui bâtissent l'écosystème tech caennais et normand.</p>
+        </div>
       </div>
-      <div class="WhyAttend-item">
-        <div class="WhyAttend-icon"><Users size={32} /></div>
-        <h3>Une communauté locale, accessible</h3>
-        <p>Un événement à taille humaine, où l'on se croise, on discute, on avance ensemble.</p>
-      </div>
-      <div class="WhyAttend-item">
-        <div class="WhyAttend-icon"><Brain size={32} /></div>
-        <h3>Tech, produit, data, design, infra, entrepreneuriat</h3>
-        <p>Un programme pluridisciplinaire qui reflète la réalité de nos métiers.</p>
-      </div>
-      <div class="WhyAttend-item">
-        <div class="WhyAttend-icon"><Hammer size={32} /></div>
-        <h3>Des gens qui construisent, ici</h3>
-        <p>On met en avant ceux qui bâtissent l'écosystème tech caennais et normand.</p>
+      <div class="WhyAttend-video">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+          title={videoTitle}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
       </div>
     </div>
   </div>
 </section>
 
 <style>
+  /* Section plus large que le reste de la page pour loger la vidéo à droite */
+  .WhyAttend {
+    max-width: 1440px;
+  }
+
+  .WhyAttend-layout {
+    display: grid;
+    gap: var(--space-xl);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Côte à côte : la vidéo (16/9) fixe la hauteur de la ligne, les cartes
+     s'étirent pour la remplir. En dessous de 1400px les cartes deviennent
+     plus hautes que la vidéo : on empile. */
+  @media (min-width: 1400px) {
+    .WhyAttend-layout {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-lg);
+    }
+
+    .WhyAttend-layout > .Grid {
+      gap: var(--space-md);
+      grid-auto-rows: 1fr;
+    }
+
+    .WhyAttend-layout > .WhyAttend-video {
+      max-width: none;
+    }
+
+    .WhyAttend-video iframe {
+      height: 100%;
+    }
+  }
+
+  .WhyAttend-video {
+    width: 100%;
+    max-width: 960px;
+    margin-inline: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    background: #000;
+  }
+
+  .WhyAttend-video iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+  }
+
   .WhyAttend-item {
-    padding: var(--space-lg);
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: var(--space-sm);
+    align-content: start;
+    padding: var(--space-md) var(--space-lg);
     background: var(--color-bg);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
@@ -40,15 +110,15 @@ import { Mic, Users, Brain, Hammer } from "lucide-astro";
 
   .WhyAttend-icon {
     color: var(--color-primary-dark);
-    margin-bottom: var(--space-md);
   }
 
   .WhyAttend-item h3 {
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     margin-bottom: var(--space-sm);
   }
 
   .WhyAttend-item p {
+    grid-column: 1 / -1;
     color: var(--color-text-light);
     font-size: var(--text-sm);
   }
